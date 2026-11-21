@@ -1,0 +1,3 @@
+/workspace/build-host/CMakeFiles/oob_protocol_test.dir
+/workspace/build-host/CMakeFiles/edit_cache.dir
+/workspace/build-host/CMakeFiles/rebuild_cache.dir
