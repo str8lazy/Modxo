@@ -8,9 +8,12 @@ Xbox CPU is hung. LPC servicing stays on core0; SMBus/control runs on core1.
 */
 #pragma once
 
-#include <modxo.h>
 #include <stdbool.h>
 #include <stdint.h>
+
+#ifndef OOB_HOST_TEST
+#include <modxo.h>
+#endif
 
 // Xbox PIC / SMC SMBus 7-bit address (write address 0x20)
 #define XBOX_PIC_ADDR 0x10
@@ -66,6 +69,16 @@ typedef struct {
     bool have_write;
 } heartbeat_state_t;
 
+typedef struct {
+    char reply[256];
+    bool ok;
+    bool needs_smbus;
+} oob_cmd_result_t;
+
+/* Returns true if line was recognized (reply filled). execute=false for dry parse. */
+bool oob_parse_and_dispatch(const char *line, oob_cmd_result_t *out, bool execute);
+
+#ifndef OOB_HOST_TEST
 extern MODXO_TASK oob_debug_hdlr;
 
 /* Called from core1 main loop; must stay light and never block LPC on core0. */
@@ -79,13 +92,6 @@ smbus_result_t smbus_probe(uint8_t addr7);
 
 const heartbeat_state_t *heartbeat_get_state(void);
 void heartbeat_set_stale_timeout_ms(uint32_t ms);
-
-/* Host-testable command parser (also used on-device). */
-typedef struct {
-    char reply[256];
-    bool ok;
-    bool needs_smbus;
-} oob_cmd_result_t;
-
-/* Returns true if line was recognized (reply filled). Pure parsing when dry_run. */
-bool oob_parse_and_dispatch(const char *line, oob_cmd_result_t *out, bool execute);
+void heartbeat_init(void);
+void oob_control_init(void);
+#endif

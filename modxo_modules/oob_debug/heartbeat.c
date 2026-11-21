@@ -10,7 +10,6 @@ Guest writes a counter; host reads age via control CDC status/heartbeat.
 #include <hardware/sync.h>
 #include <modxo/lpc_interface.h>
 #include <pico/stdlib.h>
-#include <stdatomic.h>
 
 static heartbeat_state_t hb_state = {
     .last_value = 0,

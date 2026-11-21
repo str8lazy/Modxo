@@ -12,6 +12,7 @@ hardware.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 
 #ifndef OOB_HOST_TEST
 #include <pico/stdlib.h>

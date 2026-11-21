@@ -15,7 +15,6 @@ target_include_directories(oob_debug PUBLIC
 target_compile_definitions(oob_debug PUBLIC
     PICO_STDIO_USB_USE_DEFAULT_DESCRIPTORS=0
     PICO_STDIO_USB_ENABLE_RESET_VIA_BAUD_RATE=0
-    USBD_PRODUCT="Modxo"
     MODXO_OOB_DEBUG=1
 )
 
@@ -25,5 +24,4 @@ target_link_libraries(oob_debug PUBLIC
     pico_unique_id
     hardware_gpio
     hardware_timer
-    tinyusb_device
 )

@@ -1,0 +1,15 @@
+# Stable symlinks for Modxo dual-CDC interfaces.
+# CDC0 (interface 0) = SuperIO / COM1 bridge  -> /dev/modxo
+# CDC1 (interface 2) = OOB control port       -> /dev/modxo-ctl
+#
+# Match Raspberry Pi Pico SDK VID/PID. Interface number is the CDC comm IF
+# (0 for COM1, 2 for control — each CDC uses two USB interfaces).
+#
+# Install: sudo cp udev/99-modxo.rules /etc/udev/rules.d/ && sudo udevadm control --reload
+
+SUBSYSTEM=="tty", ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="000a", ENV{ID_USB_INTERFACE_NUM}=="00", SYMLINK+="modxo", GROUP="uucp", MODE="0660", ENV{ID_MM_DEVICE_IGNORE}="1"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="000a", ENV{ID_USB_INTERFACE_NUM}=="02", SYMLINK+="modxo-ctl", GROUP="uucp", MODE="0660", ENV{ID_MM_DEVICE_IGNORE}="1"
+
+# RP2350 / Pico 2 SDK PID
+SUBSYSTEM=="tty", ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="0009", ENV{ID_USB_INTERFACE_NUM}=="00", SYMLINK+="modxo", GROUP="uucp", MODE="0660", ENV{ID_MM_DEVICE_IGNORE}="1"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="0009", ENV{ID_USB_INTERFACE_NUM}=="02", SYMLINK+="modxo-ctl", GROUP="uucp", MODE="0660", ENV{ID_MM_DEVICE_IGNORE}="1"
