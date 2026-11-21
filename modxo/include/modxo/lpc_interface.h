@@ -27,5 +27,8 @@ void lpc_interface_disable_onboard_flash(bool disable);
 void lpc_interface_start_sm(void);
 bool lpc_interface_add_io_handler(uint16_t port_base, uint16_t mask, SUPERIO_PORT_CALLBACK_T read_cback, SUPERIO_PORT_CALLBACK_T write_cback);
 
+/* Optional activity hook (weak). OOB debug overrides to track hang detection. */
+void lpc_note_activity(void);
+
 extern MODXO_TASK lpc_interface_hdlr;
 #endif
