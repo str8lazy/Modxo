@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/oob_protocol_test.dir/oob_protocol_test.c.o CMakeFiles/oob_protocol_test.dir/workspace/modxo_modules/oob_debug/oob_protocol.c.o -o oob_protocol_test 

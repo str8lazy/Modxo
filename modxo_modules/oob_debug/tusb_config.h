@@ -15,7 +15,9 @@
 
 #include "pico/stdio_usb.h"
 
+#ifndef CFG_TUD_CDC
 #define CFG_TUD_CDC (2)
+#endif
 
 #if !defined(LIB_TINYUSB_HOST) && !defined(LIB_TINYUSB_DEVICE)
 #define CFG_TUSB_RHPORT0_MODE (OPT_MODE_DEVICE)
