@@ -70,7 +70,7 @@ typedef struct {
 } heartbeat_state_t;
 
 typedef struct {
-    char reply[256];
+    char reply[512];
     bool ok;
     bool needs_smbus;
 } oob_cmd_result_t;
