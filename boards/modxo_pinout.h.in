@@ -63,6 +63,10 @@ Copyright (c) 2024, Shalx <Alejandro L. Huitron shalxmva@gmail.com>
 #define EXPANSION_PORT_I2C_SDA @EXPANSION_PORT_I2C_SDA@
 #define EXPANSION_PORT_I2C_SCL @EXPANSION_PORT_I2C_SCL@
 
+// Xbox SMBus OOB (defaults to expansion pins on Modxo V3 / RP2040-Zero/Tiny)
+#define XBOX_SMBUS_SDA @XBOX_SMBUS_SDA@
+#define XBOX_SMBUS_SCL @XBOX_SMBUS_SCL@
+
 //STATUS LED GPIO
 #define LED_STATUS_ON_LEVEL @LED_STATUS_ON_LEVEL@
 #define LED_STATUS_OFF_LEVEL @LED_STATUS_OFF_LEVEL@

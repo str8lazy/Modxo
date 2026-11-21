@@ -42,6 +42,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <legacy_display.h>
 #include <LPC47M152.h>
 #include <uart_16550.h>
+#include <oob_debug.h>
 #include <modxo/lpc_interface.h>
 #include <hardware/flash.h>
 
@@ -71,6 +72,8 @@ void core1_main()
         if(xbox_active) {
             modxo_poll_core1();
         }
+        /* OOB control/SMBus runs here so hung Xbox CPU still leaves a channel. */
+        oob_debug_poll();
         __wfe();
     }
 }
@@ -183,6 +186,7 @@ void register_handlers()
     modxo_register_handler(&serirq_hdlr);
 #endif
     modxo_register_handler(&legacy_display_hdlr);
+    modxo_register_handler(&oob_debug_hdlr);
 }
 
 #define RDID_BUF_SIZE 8

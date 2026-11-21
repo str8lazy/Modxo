@@ -95,6 +95,12 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     superio
     flashrom
     lpc_mapper
+    oob_debug
+)
+
+# Ensure dual-CDC tusb_config.h from oob_debug is found before pico_stdio_usb's.
+target_include_directories(${PROJECT_NAME} PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/modxo_modules/oob_debug
 )
 
 set(PICO_DEFAULT_BINARY_TYPE copy_to_ram)

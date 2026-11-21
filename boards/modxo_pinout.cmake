@@ -12,6 +12,9 @@ set(LED_STRIP1 31) #Not Used
 set(LED_STRIP2 31) #Not Used
 set(BOARD_FLASH_SIZE 16777216)
 
+# Xbox SMBus OOB defaults (overridden per board after include if needed).
+# Placeholder until board file sets EXPANSION_PORT pins; finalized below.
+
 set(SD_CARD_USE_SDIO false) #Not Used
 set(SD_CARD_SDIO_CMD 31) #Not Used
 set(SD_CARD_SDIO_D0 31) #Not Used
@@ -25,6 +28,14 @@ else()
 endif()
 
 message(STATUS "Building for ${MODXO_PINOUT}.")
+
+# Default Xbox SMBus pins to the expansion I2C port (GP12/13 on Zero/Tiny).
+if(NOT DEFINED XBOX_SMBUS_SDA)
+    set(XBOX_SMBUS_SDA ${EXPANSION_PORT_I2C_SDA})
+endif()
+if(NOT DEFINED XBOX_SMBUS_SCL)
+    set(XBOX_SMBUS_SCL ${EXPANSION_PORT_I2C_SCL})
+endif()
 
 configure_file(${CMAKE_CURRENT_LIST_DIR}/modxo_pinout.h.in modxo_pinout.h @ONLY)
 add_compile_definitions(PICO_FLASH_SIZE_BYTES=${BOARD_FLASH_SIZE})

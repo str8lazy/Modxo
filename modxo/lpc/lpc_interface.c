@@ -194,8 +194,14 @@ static void lpc_write_handler(uint8_t sm)
     pio_interrupt_clear(_pio, sm);
 }
 
+/* Weak default: no-op. oob_debug provides a real implementation. */
+void __attribute__((weak)) lpc_note_activity(void) {}
+
 static void lpc_request_handler(void)
 {
+    /* Cheap timestamp hook for OOB hang detection — must stay minimal. */
+    lpc_note_activity();
+
     if (pio_interrupt_get(_pio, LPC_OP_MEM_READ))
     {
         lpc_read_handler(LPC_OP_MEM_READ);
